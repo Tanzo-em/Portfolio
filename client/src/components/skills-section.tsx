@@ -1,5 +1,4 @@
 import { useState } from "react";
-import SkillIcon from "./skill-icon";
 import { 
   SiReact, 
   SiTypescript, 
@@ -12,7 +11,9 @@ import {
   SiGo, 
   SiDocker,
   SiTailwindcss,
-  SiNextdotjs
+  SiNextdotjs,
+  SiMongodb,
+  SiVercel
 } from "react-icons/si";
 
 const skills = [
@@ -25,9 +26,11 @@ const skills = [
   { name: "CSS3", icon: SiCss3, color: "text-blue-500" },
   { name: "Tailwind", icon: SiTailwindcss, color: "text-cyan-400" },
   { name: "PostgreSQL", icon: SiPostgresql, color: "text-blue-600" },
+  { name: "MongoDB", icon: SiMongodb, color: "text-green-600" },
   { name: "Git", icon: SiGit, color: "text-orange-600" },
   { name: "Go", icon: SiGo, color: "text-cyan-400" },
   { name: "Docker", icon: SiDocker, color: "text-blue-400" },
+  { name: "Vercel", icon: SiVercel, color: "text-white" },
 ];
 
 export default function SkillsSection() {
@@ -45,29 +48,52 @@ export default function SkillsSection() {
           </p>
         </div>
         
-        {/* Skills Container with Center Tooltip */}
-        <div className="relative">
-          {/* Skills Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6 gap-4 sm:gap-6 lg:gap-8">
-            {skills.map((skill) => (
-              <div
-                key={skill.name}
-                onMouseEnter={() => setHoveredSkill(skill.name)}
-                onMouseLeave={() => setHoveredSkill(null)}
-              >
-                <SkillIcon skill={skill} />
-              </div>
-            ))}
+        {/* 3D Circular Skills Layout */}
+        <div className="relative flex items-center justify-center min-h-[500px] sm:min-h-[600px]">
+          {/* Skills Circle */}
+          <div className="skills-circle relative w-80 h-80 sm:w-96 sm:h-96 lg:w-[500px] lg:h-[500px]">
+            {skills.map((skill, index) => {
+              const angle = (index * 360) / skills.length;
+              const IconComponent = skill.icon;
+              
+              return (
+                <div
+                  key={skill.name}
+                  className="skill-orbit absolute"
+                  style={{
+                    transform: `rotate(${angle}deg) translateX(160px) sm:translateX(200px) lg:translateX(250px)`,
+                    transformOrigin: '0 0',
+                  }}
+                  onMouseEnter={() => setHoveredSkill(skill.name)}
+                  onMouseLeave={() => setHoveredSkill(null)}
+                >
+                  <div 
+                    className="skill-icon-floating group relative bg-slate-800/70 backdrop-blur-sm p-4 sm:p-6 rounded-2xl border border-slate-700/50 hover:border-cyan-400/70 cursor-pointer transform transition-all duration-500 hover:scale-125"
+                    style={{
+                      transform: `rotate(-${angle}deg)`, // Counter-rotate to keep icons upright
+                    }}
+                  >
+                    <div className={`text-3xl sm:text-4xl lg:text-5xl group-hover:text-cyan-400 transition-all duration-500 ${skill.color} flex justify-center skill-logo-float`}>
+                      <IconComponent />
+                    </div>
+                    
+                    {/* Glow Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-lg"></div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
           
-          {/* Center Hover Tooltip */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-            <div className={`transition-all duration-300 ${hoveredSkill ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
-              <div className="bg-slate-900/95 backdrop-blur-md border border-cyan-400/50 rounded-2xl px-8 py-4 shadow-2xl">
-                <h3 className="text-2xl font-bold text-cyan-400 text-center whitespace-nowrap">
-                  {hoveredSkill || "Hover over a skill"}
+          {/* Center Display */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10">
+            <div className={`transition-all duration-500 ${hoveredSkill ? 'opacity-100 scale-100' : 'opacity-70 scale-90'}`}>
+              <div className="bg-slate-900/95 backdrop-blur-md border-2 border-cyan-400/60 rounded-3xl px-8 py-6 shadow-2xl min-w-[200px]">
+                <h3 className="text-2xl sm:text-3xl font-bold text-cyan-400 text-center whitespace-nowrap">
+                  {hoveredSkill || "Hover to Explore"}
                 </h3>
-                <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent mt-2"></div>
+                <div className="w-full h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent mt-3 rounded-full"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-3xl"></div>
               </div>
             </div>
           </div>
