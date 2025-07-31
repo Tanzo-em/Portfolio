@@ -54,9 +54,15 @@ export default function SkillsSection() {
           <div className="skills-circle-container relative w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] lg:w-[600px] lg:h-[600px]">
             {skills.map((skill, index) => {
               const angle = (index * 360) / skills.length;
-              const radius = 180; // Base radius in pixels
-              const x = Math.cos((angle - 90) * Math.PI / 180) * radius;
-              const y = Math.sin((angle - 90) * Math.PI / 180) * radius;
+              const radiusBase = 200; // Base radius for larger screens
+              const radiusSm = 150; // Radius for small screens
+              const radiusLg = 250; // Radius for large screens
+              
+              // Calculate positions for different screen sizes
+              const angleRad = (angle - 90) * Math.PI / 180;
+              const xBase = Math.cos(angleRad) * radiusBase;
+              const yBase = Math.sin(angleRad) * radiusBase;
+              
               const IconComponent = skill.icon;
               
               return (
@@ -66,7 +72,7 @@ export default function SkillsSection() {
                   style={{
                     left: '50%',
                     top: '50%',
-                    transform: `translate(${x}px, ${y}px) translate(-50%, -50%)`,
+                    transform: `translate(${xBase}px, ${yBase}px) translate(-50%, -50%)`,
                     '--delay': index,
                   } as React.CSSProperties}
                   onMouseEnter={() => setHoveredSkill(skill.name)}
