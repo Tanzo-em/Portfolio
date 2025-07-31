@@ -51,17 +51,16 @@ export default function SkillsSection() {
         {/* 3D Circular Skills Layout */}
         <div className="relative flex items-center justify-center min-h-[600px]">
           {/* Skills Circle Container */}
-          <div className="skills-circle-container relative w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] lg:w-[600px] lg:h-[600px]">
+          <div className="skills-circle-container relative w-[500px] h-[500px]">
             {skills.map((skill, index) => {
-              const angle = (index * 360) / skills.length;
-              const radiusBase = 200; // Base radius for larger screens
-              const radiusSm = 150; // Radius for small screens
-              const radiusLg = 250; // Radius for large screens
+              const totalIcons = skills.length;
+              const angle = (index * 360) / totalIcons;
+              const radius = 180;
               
-              // Calculate positions for different screen sizes
-              const angleRad = (angle - 90) * Math.PI / 180;
-              const xBase = Math.cos(angleRad) * radiusBase;
-              const yBase = Math.sin(angleRad) * radiusBase;
+              // Convert angle to radians and calculate position
+              const radian = (angle - 90) * (Math.PI / 180);
+              const x = Math.cos(radian) * radius;
+              const y = Math.sin(radian) * radius;
               
               const IconComponent = skill.icon;
               
@@ -70,9 +69,9 @@ export default function SkillsSection() {
                   key={skill.name}
                   className="skill-orbit-item absolute"
                   style={{
-                    left: '50%',
-                    top: '50%',
-                    transform: `translate(${xBase}px, ${yBase}px) translate(-50%, -50%)`,
+                    left: `calc(50% + ${x}px)`,
+                    top: `calc(50% + ${y}px)`,
+                    transform: 'translate(-50%, -50%)',
                     '--delay': index,
                   } as React.CSSProperties}
                   onMouseEnter={() => setHoveredSkill(skill.name)}
