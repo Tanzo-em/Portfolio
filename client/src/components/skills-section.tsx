@@ -51,11 +51,11 @@ export default function SkillsSection() {
         {/* 3D Circular Skills Layout */}
         <div className="relative flex items-center justify-center min-h-[600px]">
           {/* Skills Circle Container */}
-          <div className="skills-circle-container relative w-[500px] h-[500px]">
+          <div className="skills-circle-container relative w-[600px] h-[600px]">
             {skills.map((skill, index) => {
               const totalIcons = skills.length;
               const angle = (index * 360) / totalIcons;
-              const radius = 180;
+              const radius = 220;
               
               // Convert angle to radians and calculate position
               const radian = (angle - 90) * (Math.PI / 180);
