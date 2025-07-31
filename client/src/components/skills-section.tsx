@@ -51,17 +51,17 @@ export default function SkillsSection() {
         {/* 3D Circular Skills Layout */}
         <div className="relative flex items-center justify-center min-h-[600px]">
           {/* Skills Circle Container */}
-          <div className="skills-circle-container relative w-[500px] h-[500px]">
+          <div className="skills-circle-container relative w-[600px] h-[600px]">
             {skills.map((skill, index) => {
               const totalSkills = skills.length;
               const angleStep = 360 / totalSkills;
               const currentAngle = index * angleStep;
-              const radius = 180;
+              const radius = 220;
               
               // Calculate exact position using trigonometry
               const radians = (currentAngle * Math.PI) / 180;
-              const x = 250 + Math.cos(radians - Math.PI / 2) * radius; // 250 is half of container width
-              const y = 250 + Math.sin(radians - Math.PI / 2) * radius; // 250 is half of container height
+              const x = 300 + Math.cos(radians - Math.PI / 2) * radius; // 300 is half of container width
+              const y = 300 + Math.sin(radians - Math.PI / 2) * radius; // 300 is half of container height
               
               const IconComponent = skill.icon;
               
