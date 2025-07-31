@@ -89,17 +89,17 @@ export default function SkillsSection() {
                 </div>
               );
             })}
-          </div>
-          
-          {/* Center Display */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10">
-            <div className={`transition-all duration-500 ${hoveredSkill ? 'opacity-100 scale-100' : 'opacity-70 scale-90'}`}>
-              <div className="bg-slate-900/95 backdrop-blur-md border-2 border-cyan-400/60 rounded-3xl px-8 py-6 shadow-2xl min-w-[200px]">
-                <h3 className="text-2xl sm:text-3xl font-bold text-cyan-400 text-center whitespace-nowrap">
-                  {hoveredSkill || "Hover to Explore"}
-                </h3>
-                <div className="w-full h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent mt-3 rounded-full"></div>
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-3xl"></div>
+            
+            {/* Center Display - positioned within the circle container */}
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10">
+              <div className={`transition-all duration-500 ${hoveredSkill ? 'opacity-100 scale-100' : 'opacity-70 scale-90'}`}>
+                <div className="bg-slate-900/95 backdrop-blur-md border-2 border-cyan-400/60 rounded-3xl px-8 py-6 shadow-2xl min-w-[200px]">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-cyan-400 text-center whitespace-nowrap">
+                    {hoveredSkill || "Hover to Explore"}
+                  </h3>
+                  <div className="w-full h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent mt-3 rounded-full"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-3xl"></div>
+                </div>
               </div>
             </div>
           </div>
