@@ -53,14 +53,26 @@ export default function SkillsSection() {
           {/* Skills Circle Container */}
           <div className="skills-circle-container relative w-[500px] h-[500px]">
             {skills.map((skill, index) => {
+              const totalSkills = skills.length;
+              const angleStep = 360 / totalSkills;
+              const currentAngle = index * angleStep;
+              const radius = 180;
+              
+              // Calculate exact position using trigonometry
+              const radians = (currentAngle * Math.PI) / 180;
+              const x = 250 + Math.cos(radians - Math.PI / 2) * radius; // 250 is half of container width
+              const y = 250 + Math.sin(radians - Math.PI / 2) * radius; // 250 is half of container height
+              
               const IconComponent = skill.icon;
               
               return (
                 <div
                   key={skill.name}
-                  className="skill-orbit-item absolute top-0 left-1/2 origin-bottom"
+                  className="skill-orbit-item absolute"
                   style={{
-                    transform: `translate(-50%, 0) rotate(${index * (360 / skills.length)}deg) translateY(-200px) rotate(-${index * (360 / skills.length)}deg)`,
+                    left: `${x}px`,
+                    top: `${y}px`,
+                    transform: 'translate(-50%, -50%)',
                     '--delay': index,
                   } as React.CSSProperties}
                   onMouseEnter={() => setHoveredSkill(skill.name)}
