@@ -1,3 +1,4 @@
+import { useState } from "react";
 import SkillIcon from "./skill-icon";
 import { 
   SiReact, 
@@ -30,8 +31,10 @@ const skills = [
 ];
 
 export default function SkillsSection() {
+  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+
   return (
-    <section id="skills" className="py-20">
+    <section id="skills" className="py-20 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
@@ -42,11 +45,32 @@ export default function SkillsSection() {
           </p>
         </div>
         
-        {/* Skills Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6 gap-4 sm:gap-6 lg:gap-8">
-          {skills.map((skill) => (
-            <SkillIcon key={skill.name} skill={skill} />
-          ))}
+        {/* Skills Container with Center Tooltip */}
+        <div className="relative">
+          {/* Skills Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6 gap-4 sm:gap-6 lg:gap-8">
+            {skills.map((skill) => (
+              <div
+                key={skill.name}
+                onMouseEnter={() => setHoveredSkill(skill.name)}
+                onMouseLeave={() => setHoveredSkill(null)}
+              >
+                <SkillIcon skill={skill} />
+              </div>
+            ))}
+          </div>
+          
+          {/* Center Hover Tooltip */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+            <div className={`transition-all duration-300 ${hoveredSkill ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
+              <div className="bg-slate-900/95 backdrop-blur-md border border-cyan-400/50 rounded-2xl px-8 py-4 shadow-2xl">
+                <h3 className="text-2xl font-bold text-cyan-400 text-center whitespace-nowrap">
+                  {hoveredSkill || "Hover over a skill"}
+                </h3>
+                <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent mt-2"></div>
+              </div>
+            </div>
+          </div>
         </div>
         
         {/* Additional Skills */}
