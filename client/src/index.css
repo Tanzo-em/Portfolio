@@ -67,7 +67,6 @@
 
 @layer utilities {
   .skills-circle-container {
-    animation: rotateCircle 40s linear infinite;
     transform-style: preserve-3d;
   }
   
@@ -99,10 +98,7 @@
     animation: logoGlow 1.5s ease-in-out infinite;
   }
   
-  @keyframes rotateCircle {
-    0% { transform: rotateZ(0deg); }
-    100% { transform: rotateZ(360deg); }
-  }
+
   
   @keyframes floatUp {
     0%, 100% { 
@@ -136,10 +132,7 @@
     }
   }
   
-  /* Pause circle rotation on hover */
-  .skills-circle-container:hover {
-    animation-play-state: paused;
-  }
+
   
   /* Responsive adjustments */
   @media (max-width: 640px) {
