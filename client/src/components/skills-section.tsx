@@ -52,15 +52,17 @@ export default function SkillsSection() {
         <div className="relative flex items-center justify-center min-h-[600px]">
           {/* Skills Circle Container */}
           <div className="skills-circle-container relative w-[600px] h-[600px]">
+            {/* Debug Circle - Remove this later */}
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] border border-cyan-400/20 rounded-full pointer-events-none"></div>
             {skills.map((skill, index) => {
               const totalIcons = skills.length;
               const angle = (index * 360) / totalIcons;
-              const radius = 220;
+              const radius = 200; // Fixed radius for all icons
               
               // Convert angle to radians and calculate position
-              const radian = (angle - 90) * (Math.PI / 180);
-              const x = Math.cos(radian) * radius;
-              const y = Math.sin(radian) * radius;
+              const radian = (angle * Math.PI) / 180; // Start from 0 degrees (top)
+              const x = Math.sin(radian) * radius; // sin for x-axis
+              const y = -Math.cos(radian) * radius; // -cos for y-axis (negative to start from top)
               
               const IconComponent = skill.icon;
               
