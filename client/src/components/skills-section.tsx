@@ -90,8 +90,8 @@ export default function SkillsSection() {
               );
             })}
             
-            {/* Center Display - positioned within the circle container */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10">
+            {/* Center Display - positioned at exact center coordinates */}
+            <div className="absolute pointer-events-none z-10" style={{ left: '300px', top: '300px', transform: 'translate(-50%, -50%)' }}>
               <div className={`transition-all duration-500 ${hoveredSkill ? 'opacity-100 scale-100' : 'opacity-70 scale-90'}`}>
                 <div className="bg-slate-900/95 backdrop-blur-md border-2 border-cyan-400/60 rounded-3xl px-8 py-6 shadow-2xl min-w-[200px]">
                   <h3 className="text-2xl sm:text-3xl font-bold text-cyan-400 text-center whitespace-nowrap">
