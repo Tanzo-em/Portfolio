@@ -123,9 +123,10 @@
     animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
   }
   
-  .navbar-blur {
-    backdrop-filter: blur(10px);
-    background: rgba(15, 23, 42, 0.8);
+  .glass-nav {
+    backdrop-filter: blur(16px);
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(148, 163, 184, 0.1);
   }
   
   .particle {
