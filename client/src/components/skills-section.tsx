@@ -49,36 +49,36 @@ export default function SkillsSection() {
         </div>
         
         {/* 3D Circular Skills Layout */}
-        <div className="relative flex items-center justify-center min-h-[500px] sm:min-h-[600px]">
-          {/* Skills Circle */}
-          <div className="skills-circle relative w-80 h-80 sm:w-96 sm:h-96 lg:w-[500px] lg:h-[500px]">
+        <div className="relative flex items-center justify-center min-h-[600px]">
+          {/* Skills Circle Container */}
+          <div className="skills-circle-container relative w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] lg:w-[600px] lg:h-[600px]">
             {skills.map((skill, index) => {
               const angle = (index * 360) / skills.length;
+              const radius = 180; // Base radius in pixels
+              const x = Math.cos((angle - 90) * Math.PI / 180) * radius;
+              const y = Math.sin((angle - 90) * Math.PI / 180) * radius;
               const IconComponent = skill.icon;
               
               return (
                 <div
                   key={skill.name}
-                  className="skill-orbit absolute"
+                  className="skill-orbit-item absolute"
                   style={{
-                    transform: `rotate(${angle}deg) translateX(160px) sm:translateX(200px) lg:translateX(250px)`,
-                    transformOrigin: '0 0',
-                  }}
+                    left: '50%',
+                    top: '50%',
+                    transform: `translate(${x}px, ${y}px) translate(-50%, -50%)`,
+                    '--delay': index,
+                  } as React.CSSProperties}
                   onMouseEnter={() => setHoveredSkill(skill.name)}
                   onMouseLeave={() => setHoveredSkill(null)}
                 >
-                  <div 
-                    className="skill-icon-floating group relative bg-slate-800/70 backdrop-blur-sm p-4 sm:p-6 rounded-2xl border border-slate-700/50 hover:border-cyan-400/70 cursor-pointer transform transition-all duration-500 hover:scale-125"
-                    style={{
-                      transform: `rotate(-${angle}deg)`, // Counter-rotate to keep icons upright
-                    }}
-                  >
-                    <div className={`text-3xl sm:text-4xl lg:text-5xl group-hover:text-cyan-400 transition-all duration-500 ${skill.color} flex justify-center skill-logo-float`}>
+                  <div className="skill-icon-floating group relative bg-slate-800/80 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-slate-700/50 hover:border-cyan-400/70 cursor-pointer transform transition-all duration-500 hover:scale-125">
+                    <div className={`text-3xl sm:text-4xl group-hover:text-cyan-400 transition-all duration-500 ${skill.color} flex justify-center skill-logo-float`}>
                       <IconComponent />
                     </div>
                     
                     {/* Glow Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-lg"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-lg -z-10"></div>
                   </div>
                 </div>
               );

@@ -66,39 +66,37 @@
 }
 
 @layer utilities {
-  .skills-circle {
-    animation: rotateCircle 30s linear infinite;
+  .skills-circle-container {
+    animation: rotateCircle 40s linear infinite;
     transform-style: preserve-3d;
   }
   
-  .skill-orbit {
-    top: 50%;
-    left: 50%;
-    transform-origin: 0 0;
+  .skill-orbit-item {
+    animation: floatUp 4s ease-in-out infinite;
+    animation-delay: calc(var(--delay, 0) * 0.3s);
   }
   
   .skill-icon-floating {
     transform-style: preserve-3d;
-    animation: floatUp 3s ease-in-out infinite;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .skill-icon-floating:hover {
-    animation-play-state: paused;
-    transform: translateZ(30px) scale(1.25);
+    transform: translateZ(20px) scale(1.3) rotateY(15deg);
     box-shadow: 
-      0 20px 50px rgba(6, 182, 212, 0.4),
-      0 10px 25px rgba(0, 0, 0, 0.5),
-      0 0 0 2px rgba(6, 182, 212, 0.3);
+      0 25px 50px rgba(6, 182, 212, 0.4),
+      0 12px 30px rgba(0, 0, 0, 0.6),
+      0 0 0 2px rgba(6, 182, 212, 0.5);
   }
   
   .skill-logo-float {
-    animation: logoFloat 2s ease-in-out infinite;
+    animation: logoFloat 3s ease-in-out infinite;
     transform-style: preserve-3d;
   }
   
   .skill-logo-float:hover {
-    animation: logoGlow 1s ease-in-out infinite;
+    animation: logoGlow 1.5s ease-in-out infinite;
   }
   
   @keyframes rotateCircle {
@@ -108,36 +106,46 @@
   
   @keyframes floatUp {
     0%, 100% { 
-      transform: translateY(0px) rotateY(0deg);
+      transform: translateY(0px);
     }
-    50% { 
-      transform: translateY(-10px) rotateY(180deg);
+    33% { 
+      transform: translateY(-8px);
+    }
+    66% { 
+      transform: translateY(4px);
     }
   }
   
   @keyframes logoFloat {
     0%, 100% { 
-      transform: translateY(0px) scale(1);
+      transform: scale(1) rotateY(0deg);
     }
     50% { 
-      transform: translateY(-5px) scale(1.05);
+      transform: scale(1.1) rotateY(10deg);
     }
   }
   
   @keyframes logoGlow {
     0%, 100% { 
-      transform: scale(1) rotateY(0deg);
-      filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.5));
+      transform: scale(1) rotateX(0deg);
+      filter: drop-shadow(0 0 15px rgba(6, 182, 212, 0.6));
     }
     50% { 
-      transform: scale(1.1) rotateY(180deg);
-      filter: drop-shadow(0 0 20px rgba(6, 182, 212, 0.8));
+      transform: scale(1.2) rotateX(15deg);
+      filter: drop-shadow(0 0 25px rgba(6, 182, 212, 0.9));
     }
   }
   
   /* Pause circle rotation on hover */
-  .skills-circle:hover {
+  .skills-circle-container:hover {
     animation-play-state: paused;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .skill-orbit-item {
+      transform: scale(0.8);
+    }
   }
   
   .typing-text {
