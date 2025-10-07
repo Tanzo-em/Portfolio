@@ -1,4 +1,7 @@
 import { Download } from "lucide-react";
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
 
 export default function AboutSection() {
   const handleDownloadResume = () => {
@@ -6,21 +9,39 @@ export default function AboutSection() {
     console.log("Download resume clicked");
   };
 
+
+   const ref = useRef(null);
+    const isInView = useInView(ref, { once: true, amount: 0.3 });
+
   return (
-    <section id="about" className="py-20">
+    <section id="about" className="py-20" ref={ref}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
             <span className="text-cyan-400">About</span> Me
           </h2>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            Passionate developer with expertise in modern web technologies and a keen eye for design
-          </p>
-        </div>
+
+          <motion.div 
+            className="w-24 h-1 bg-gradient-to-r from-purple-400 to-blue-400 mx-auto"
+            initial={{ width: 0 }}
+            animate={isInView ? { width: 96 } : { width: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          />
+        </motion.div>
         
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* About Content */}
-          <div className="space-y-6">
+          <motion.div 
+            className="space-y-6"
+            initial={{ opacity: 0, x: -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
             <div className="animate-fadeInUp">
               <h3 className="text-2xl font-semibold text-slate-100 mb-4">
                 Full Stack Developer & Creative Problem Solver
@@ -64,15 +85,20 @@ export default function AboutSection() {
                 Download Resume
               </button>
             </div>
-          </div>
+          </motion.div>
           
           {/* Stats & Image */}
-          <div className="space-y-8">
+          <motion.div 
+            className="space-y-8"
+            initial={{ opacity: 0, x: 30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
             {/* Profile Image */}
             <div className="relative mx-auto w-80 h-80 lg:w-96 lg:h-96">
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full animate-spin3d opacity-20"></div>
+              <div className="absolute inset-0 bg-gradient-to-br  rounded-full  "></div>
               <img 
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=800" 
+                src="src\public\profile_pic.JPG" 
                 alt="Developer profile" 
                 className="w-full h-full rounded-full object-cover border-4 border-slate-700 shadow-2xl"
               />
@@ -93,7 +119,7 @@ export default function AboutSection() {
                 <div className="text-sm text-slate-400">Happy Clients</div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

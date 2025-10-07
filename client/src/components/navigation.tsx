@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Home, User, Code, Mail } from "lucide-react";
+import { Menu, X, Home, User, Code, Mail, FolderGit2 } from "lucide-react";
 
 export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -23,8 +23,8 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300">
-      <div className="bg-slate-900/70 backdrop-blur-md border border-slate-700/50 rounded-full px-6 py-3 shadow-xl">
+    <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 transition-all mb-5- duration-300">
+      <div className="bg-slate-900/20 backdrop-blur-md border border-cyan-400 rounded-full px-6 py-3 shadow-xl">
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           <button 
@@ -48,6 +48,14 @@ export default function Navigation() {
           >
             <Code className="w-5 h-5" />
           </button>
+          <button 
+            onClick={() => scrollToSection('projects')} 
+            className="p-2 text-slate-400 hover:text-cyan-400 hover:bg-cyan-400/10 rounded-full transition-all duration-300 group"
+            title="projects"
+          >
+            <FolderGit2 className="w-5 h-5" />
+          </button>
+          
           <button 
             onClick={() => scrollToSection('contact')} 
             className="p-2 text-slate-400 hover:text-cyan-400 hover:bg-cyan-400/10 rounded-full transition-all duration-300 group"
@@ -96,6 +104,13 @@ export default function Navigation() {
               </button>
               <button 
                 onClick={() => scrollToSection('contact')}
+                className="flex items-center space-x-3 p-3 text-slate-400 hover:text-cyan-400 hover:bg-cyan-400/10 rounded-xl transition-all duration-300"
+              >
+                <FolderGit2 className="w-5 h-5" />
+                <span className="font-medium">Projects</span>
+              </button>
+              <button 
+                onClick={() => scrollToSection('projects')}
                 className="flex items-center space-x-3 p-3 text-slate-400 hover:text-cyan-400 hover:bg-cyan-400/10 rounded-xl transition-all duration-300"
               >
                 <Mail className="w-5 h-5" />

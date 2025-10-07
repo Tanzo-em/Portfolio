@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,11 +10,17 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, Phone, MapPin, Github, Linkedin, Twitter, Dribbble, Loader2, CheckCircle } from "lucide-react";
+import { motion, useInView } from "framer-motion";
 
 export default function ContactSection() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const ref = useRef(null);
+  const isInView = useInView(ref, { 
+    once: true, 
+    amount: 0.3 
+  });
 
   const form = useForm<InsertContact>({
     resolver: zodResolver(insertContactSchema),
@@ -56,21 +62,52 @@ export default function ContactSection() {
     contactMutation.mutate(data);
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6 }
+    }
+  };
+
   return (
-    <section id="contact" className="py-20">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+    <section id="contact" className="py-20" ref={ref}>
+      <motion.div 
+        className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+      >
+        <motion.div 
+          className="text-center mb-16"
+          variants={itemVariants}
+        >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
             Get In <span className="text-cyan-400">Touch</span>
           </h2>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto">
             Have a project in mind? Let's work together to bring your ideas to life
           </p>
-        </div>
+        </motion.div>
         
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Info */}
-          <div className="space-y-8">
+          <motion.div 
+            className="space-y-8"
+            variants={itemVariants}
+          >
             <div className="animate-fadeInUp">
               <h3 className="text-2xl font-semibold text-slate-100 mb-6">Let's Start a Conversation</h3>
               <p className="text-slate-300 leading-relaxed mb-8">
@@ -86,7 +123,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-slate-100">Email</h4>
-                  <p className="text-slate-400">john@developer.com</p>
+                  <p className="text-slate-400">Rakeshkr.kumar88@gmail.com</p>
                 </div>
               </div>
               
@@ -96,7 +133,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-slate-100">Phone</h4>
-                  <p className="text-slate-400">+1 (555) 123-4567</p>
+                  <p className="text-slate-400">+91-7028384085</p>
                 </div>
               </div>
               
@@ -106,33 +143,17 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-slate-100">Location</h4>
-                  <p className="text-slate-400">San Francisco, CA</p>
+                  <p className="text-slate-400">Pune, India</p>
                 </div>
               </div>
             </div>
-            
-            {/* Social Links */}
-            <div className="pt-8">
-              <h4 className="font-semibold text-slate-100 mb-4">Follow Me</h4>
-              <div className="flex space-x-4">
-                <a href="#" className="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-cyan-500 hover:text-white transition-all duration-300 transform hover:scale-110">
-                  <Github className="w-6 h-6" />
-                </a>
-                <a href="#" className="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-cyan-500 hover:text-white transition-all duration-300 transform hover:scale-110">
-                  <Linkedin className="w-6 h-6" />
-                </a>
-                <a href="#" className="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-cyan-500 hover:text-white transition-all duration-300 transform hover:scale-110">
-                  <Twitter className="w-6 h-6" />
-                </a>
-                <a href="#" className="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-cyan-500 hover:text-white transition-all duration-300 transform hover:scale-110">
-                  <Dribbble className="w-6 h-6" />
-                </a>
-              </div>
-            </div>
-          </div>
+          </motion.div>
           
           {/* Contact Form */}
-          <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+          <motion.div 
+            className="bg-slate-800 p-8 rounded-2xl border border-slate-700"
+            variants={itemVariants}
+          >
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
@@ -218,9 +239,28 @@ export default function ContactSection() {
                 )}
               </Button>
             </form>
-          </div>
+          </motion.div>
         </div>
-      </div>
+
+        {/* Social Links */}
+        <motion.div 
+          className="flex space-x-4 mt-8"
+          variants={itemVariants}
+        >
+          <a href="https://github.com/Tanzo-em" target="_blank" className="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-cyan-500 hover:text-white transition-all duration-300 transform hover:scale-110">
+            <Github className="w-6 h-6" />
+          </a>
+          <a href="https://www.linkedin.com/in/rakeshrkt121" target="_blank" className="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-cyan-500 hover:text-white transition-all duration-300 transform hover:scale-110">
+            <Linkedin className="w-6 h-6" />
+          </a>
+          <a href="https://x.com/_RakeshRkt_" target="_blank" className="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-cyan-500 hover:text-white transition-all duration-300 transform hover:scale-110">
+            <Twitter className="w-6 h-6" />
+          </a>
+          <a href="https://dribbble.com/rakeshkr-kumar88" target="_blank" className="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-cyan-500 hover:text-white transition-all duration-300 transform hover:scale-110">
+            <Dribbble className="w-6 h-6" />
+          </a>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

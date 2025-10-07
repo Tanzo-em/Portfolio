@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronDown, Github, Linkedin, Twitter, Mail } from "lucide-react";
+import { ChevronDown, Github, Linkedin, Twitter, Mail, Dribbble } from "lucide-react";
 
 export default function HeroSection() {
   const [displayText, setDisplayText] = useState("");
@@ -11,6 +11,7 @@ export default function HeroSection() {
       if (index <= fullText.length) {
         setDisplayText(fullText.slice(0, index));
         index++;
+        
       } else {
         clearInterval(timer);
       }
@@ -27,12 +28,12 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative pt-16">
+    <section id="home" className="min-h-screen flex items-center justify-center relative top-6 sm:pt-16 pt-5">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="animate-fadeInUp">
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-6">
             <span className="text-slate-100">Hi, I'm</span>
-            <span className="text-cyan-400 block mt-2">John Developer</span>
+            <span className="text-cyan-400 block mt-2">Rakesh Kumar</span>
           </h1>
           
           <div className="text-xl sm:text-2xl lg:text-3xl text-slate-300 mb-8 h-16 flex items-center justify-center">
@@ -61,17 +62,17 @@ export default function HeroSection() {
           
           {/* Social Links */}
           <div className="flex justify-center space-x-6 mt-12">
-            <a href="#" className="text-slate-400 hover:text-cyan-400 transition-colors duration-300 transform hover:scale-110">
+            <a href="https://github.com/Tanzo-em" target="_blank" className="text-slate-400 hover:text-cyan-400 transition-colors duration-300 transform hover:scale-110">
               <Github className="w-8 h-8" />
             </a>
-            <a href="#" className="text-slate-400 hover:text-cyan-400 transition-colors duration-300 transform hover:scale-110">
+            <a href="https://www.linkedin.com/in/rakeshrkt121" target="_blank" className="text-slate-400 hover:text-cyan-400 transition-colors duration-300 transform hover:scale-110">
               <Linkedin className="w-8 h-8" />
             </a>
-            <a href="#" className="text-slate-400 hover:text-cyan-400 transition-colors duration-300 transform hover:scale-110">
+            <a href="https://x.com/_RakeshRkt_" target="_blank" className="text-slate-400 hover:text-cyan-400 transition-colors duration-300 transform hover:scale-110">
               <Twitter className="w-8 h-8" />
             </a>
-            <a href="#" className="text-slate-400 hover:text-cyan-400 transition-colors duration-300 transform hover:scale-110">
-              <Mail className="w-8 h-8" />
+            <a href="https://dribbble.com/rakeshkr-kumar88" target="_blank" className="text-slate-400 hover:text-cyan-400 transition-colors duration-300 transform hover:scale-110">
+              <Dribbble className="w-8 h-8" />
             </a>
           </div>
         </div>
