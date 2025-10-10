@@ -87,6 +87,8 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                   {project.liveUrl && (
                     <motion.a 
                       href={project.liveUrl}
+                      target="_blank" 
+                      rel="noopener noreferrer" 
                       className="text-cyan-400 hover:text-cyan-300 
                         transition-colors duration-300 flex items-center
                         dark:text-cyan-400 dark:hover:text-cyan-300"
@@ -99,6 +101,8 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                   {project.githubUrl && (
                     <motion.a 
                       href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer" 
                       className="text-slate-400 hover:text-cyan-400 
                         transition-colors duration-300 flex items-center
                         dark:text-slate-300 dark:hover:text-cyan-400"

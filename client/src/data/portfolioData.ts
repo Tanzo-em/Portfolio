@@ -28,7 +28,7 @@ export interface ContactInfo {
 
 export const portfolioData = {
   personal: {
-    name: "Alex Johnson",
+    name: "Rakesh Kumar",
     title: "Full-Stack Developer & UI/UX Designer",
     description: "crafting digital experiences that matter",
     bio: [
@@ -47,30 +47,32 @@ export const portfolioData = {
     {
       id: "1", 
       title: "E-Commerce Platform",
-      description: "A modern e-commerce solution built with React and Node.js, featuring real-time inventory management and secure payment processing.",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      technologies: ["React", "Node.js", "MongoDB"],
-      liveUrl: "#",
-      githubUrl: "#"
+      description: "A full-stack e-commerce website designed with a clean, minimalist aesthetic and optimized for a smooth shopping experience.An integrated admin panel empowers store owners to easily add new products.",
+      image: "/snugway.png",
+  
+      technologies: ["React", "Node.js", "MongoDB" , "Mongoose" , "tailwindCSS" , "Express", "dotenv",   "jsonwebtoken" ,"Vercel"],
+      liveUrl: "https://snugway.vercel.app",
+      githubUrl: "https://github.com/Tanzo-em/snugway-full-stack"
     },
     {
       id: "2",
-      title: "Task Management App", 
-      description: "A collaborative task management application with real-time updates, team collaboration features, and intuitive drag-and-drop interface.",
-      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      technologies: ["Vue.js", "Firebase", "Tailwind"],
-      liveUrl: "#",
-      githubUrl: "#"
+      title: "Trip Planner", 
+      description: "Built a full-stack travel planning app with Next.js featuring GitHub OAuth via NextAuth.js. Enabled itinerary creation, destination organization, and user authentication. Deployed on Vercel with a responsive UI and scalable database.",
+      image: "/triplanzy.png",
+      technologies: [" Next.js", "TypeScript", "TailwindCSS","PostgreSQL","Prisma","NextAuth.js","Vercel"],
+      liveUrl: "https://triplanzy.vercel.app",
+      githubUrl: "https://github.com/Tanzo-em/Travel-planner"
     },
     {
       id: "3",
-      title: "Task Management App", 
-      description: "A collaborative task management application with real-time updates, team collaboration features, and intuitive drag-and-drop interface.",
-      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      technologies: ["Vue.js", "Firebase", "Tailwind"],
-      liveUrl: "#",
-      githubUrl: "#"
+      title: "Get-Me-A-Chai", 
+      description: "Get Me A Chai, is a Next.js application designed to allow users to support others by making donations.The app allows users to create profiles, make payments, and view top supporters, making it ideal for crowdfunding or small-scale donation platforms.",
+      image: "/chaibuddy.png",
+      technologies: ["React", "Next.js", "TailwindCSS","Razorpay", "MongoDB", "Mongoose", "vercel"],
+      liveUrl: "https://chaibuddy.vercel.app",
+      githubUrl: "https://github.com/Tanzo-em/Get-Me-a-Chai#"
     },
+    
     
   ] as Project[],
 
