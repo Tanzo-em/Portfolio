@@ -7,8 +7,8 @@ export default function AboutSection() {
   const handleDownloadResume = () => {
     const link = document.createElement("a");
     link.href = "/resume.pdf"; 
-      console.log("Downloading file from:", link.href); // Path to your resume in the public folder
-    link.download = "My_Resume.pdf"; // The name of the file to be downloaded
+      console.log("Downloading file from:", link.href); 
+    link.download = "My_Resume.pdf";
     link.click();
   };
 
