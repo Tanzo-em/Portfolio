@@ -35,7 +35,7 @@ export const portfolioData = {
       "With over 5 years of experience in web development and design, I specialize in creating beautiful, functional, and user-centered digital experiences. My passion lies in the intersection of design and technology, where creativity meets functionality.",
       "I believe in the power of clean code, intuitive design, and continuous learning. When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community."
     ],
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=800",
+    image: "/profile_pic.JPG",
     stats: {
       projects: 50,
       experience: 5,
