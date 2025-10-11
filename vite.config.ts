@@ -24,5 +24,7 @@ export default defineConfig({
         manualChunks: undefined,
       },
     },
+    copyPublicDir: true,
   },
+  publicDir: path.resolve(__dirname, "public"),
 });
