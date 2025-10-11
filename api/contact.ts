@@ -21,7 +21,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
     await transporter.sendMail({
       from: `Portfolio Contact <${process.env.EMAIL_USER}>`,
-      to: 'your-email@example.com',
+      to: 'rakeshkr.kumar88@gmail.com',
       subject: `New Contact Form Submission: ${validated.subject}`,
       text: `You have received a new message from ${validated.name} <${validated.email}>\n\n${validated.message}`,
     });
