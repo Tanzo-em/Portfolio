@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from 'zod';
 import nodemailer from 'nodemailer';
+import { storage } from '../server/storage';
 
 // Define schema locally to avoid import issues in Vercel
 const insertContactSchema = z.object({
@@ -31,13 +32,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const validated = insertContactSchema.parse(req.body);
     console.log('Contact form submission:', validated);
     
-    // For now, just create a mock contact (database functionality temporarily disabled)
-    const contact = {
-      id: Date.now().toString(),
-      ...validated,
-      createdAt: new Date().toISOString()
-    };
-    console.log('Contact data processed:', contact);
+    // Try to save to database
+    let contact = null;
+    try {
+      contact = await storage.createContact(validated);
+      console.log('Contact saved to database:', contact);
+    } catch (dbError: any) {
+      console.error('Database save failed:', dbError);
+      // Create a mock contact for response if database fails
+      contact = {
+        id: Date.now().toString(),
+        ...validated,
+        createdAt: new Date().toISOString()
+      };
+      console.log('Using mock contact due to database error');
+    }
     
     // Try to send email, but don't fail if it doesn't work
     try {
