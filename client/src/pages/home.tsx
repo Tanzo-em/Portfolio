@@ -3,7 +3,7 @@ import HeroSection from "@/components/hero-section";
 import AboutSection from "@/components/about-section";
 import SkillsSection from "@/components/skills-section";
 import ContactSection from "@/components/contact-section";
-import ProjectsSection from "@/components/projectSection";
+import ProjectsSection from "@/components/ProjectSection";
 import { portfolioData } from "@/data/portfolioData";
 import { useEffect } from "react";
 
