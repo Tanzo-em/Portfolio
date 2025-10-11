@@ -10,6 +10,19 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Import and use API routes
+import contactHandler from '../api/contact';
+import contactsHandler from '../api/contacts';
+
+// API routes
+app.post('/api/contact', async (req: Request, res: Response) => {
+  await contactHandler(req as any, res as any);
+});
+
+app.get('/api/contacts', async (req: Request, res: Response) => {
+  await contactsHandler(req as any, res as any);
+});
+
 
 
 

@@ -5,8 +5,7 @@
     { "src": "api/**/*.ts", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "^/api/contact$", "dest": "api/contact.ts" },
-    { "src": "^/api/contacts$", "dest": "api/contacts.ts" },
-    { "src": "^(?!/api/).*$", "dest": "/dist/public/index.html" }
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/(.*)", "dest": "/dist/public/index.html" }
   ]
 }
