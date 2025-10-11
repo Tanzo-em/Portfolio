@@ -30,10 +30,30 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   
   try {
     const validated = insertContactSchema.parse(req.body);
-    
-    // For now, just return success without database or email
-    // TODO: Add database and email functionality after debugging
     console.log('Contact form submission:', validated);
+    
+    // Try to send email, but don't fail if it doesn't work
+    try {
+      const transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+          user: process.env.EMAIL_USER as string,
+          pass: process.env.EMAIL_PASS as string,
+        },
+      });
+      
+      await transporter.sendMail({
+        from: `Portfolio Contact <${process.env.EMAIL_USER}>`,
+        to: 'rakeshkr.kumar88@gmail.com',
+        subject: `New Contact Form Submission: ${validated.subject}`,
+        text: `You have received a new message from ${validated.name} <${validated.email}>\n\n${validated.message}`,
+      });
+      
+      console.log('Email sent successfully');
+    } catch (emailError) {
+      console.error('Email sending failed:', emailError);
+      // Don't fail the entire request if email fails
+    }
     
     res.status(200).json({ 
       success: true, 
