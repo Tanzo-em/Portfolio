@@ -32,6 +32,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const validated = insertContactSchema.parse(req.body);
     console.log('Contact form submission:', validated);
     
+    // Save to database
+    const contact = await storage.createContact(validated);
+    console.log('Contact saved to database:', contact);
+    
     // Try to send email, but don't fail if it doesn't work
     try {
       const transporter = nodemailer.createTransport({
@@ -58,11 +62,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     res.status(200).json({ 
       success: true, 
       message: 'Contact form submitted successfully',
-      contact: {
-        id: Date.now().toString(),
-        ...validated,
-        createdAt: new Date().toISOString()
-      }
+      contact
     });
   } catch (err: any) {
     console.error('Contact form error:', err);
