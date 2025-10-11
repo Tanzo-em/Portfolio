@@ -1,8 +1,15 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from 'zod';
 import nodemailer from 'nodemailer';
-import { insertContactSchema } from '../shared/schema';
 import {storage} from '../server/storage';
+
+// Define schema locally to avoid import issues in Vercel
+const insertContactSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  email: z.string().email('Invalid email address'),
+  subject: z.string().min(1, 'Subject is required'),
+  message: z.string().min(1, 'Message is required'),
+});
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Set CORS headers
