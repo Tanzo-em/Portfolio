@@ -1,7 +1,8 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from 'zod';
 import nodemailer from 'nodemailer';
-import { storage } from '../server/storage';
+import { db } from '../server/db';
+import { contacts } from '../server/storage';
 
 // Define schema locally to avoid import issues in Vercel
 const insertContactSchema = z.object({
@@ -35,7 +36,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Try to save to database
     let contact = null;
     try {
-      contact = await storage.createContact(validated);
+      const [newContact] = await db.insert(contacts).values(validated).returning();
+      contact = newContact;
       console.log('Contact saved to database:', contact);
     } catch (dbError: any) {
       console.error('Database save failed:', dbError);
