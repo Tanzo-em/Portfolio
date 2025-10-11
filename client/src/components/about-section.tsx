@@ -100,7 +100,7 @@ export default function AboutSection() {
             <div className="relative mx-auto w-80 h-80 lg:w-96 lg:h-96">
               <div className="absolute inset-0 bg-gradient-to-br rounded-full"></div>
               <img
-                src="src\public\profile_pic.JPG"
+                src="/profile_pic.JPG"
                 alt="Developer profile"
                 className="w-full h-full rounded-full object-cover border-4 border-slate-700 shadow-2xl"
               />
