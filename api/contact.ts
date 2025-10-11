@@ -1,8 +1,10 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from 'zod';
 import nodemailer from 'nodemailer';
-import { db } from '../server/db';
-import { contacts } from '../server/storage';
+import { Pool, neonConfig } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-serverless';
+import { sql } from 'drizzle-orm';
+import { pgTable, text, varchar, timestamp } from 'drizzle-orm/pg-core';
 
 // Define schema locally to avoid import issues in Vercel
 const insertContactSchema = z.object({
@@ -11,6 +13,39 @@ const insertContactSchema = z.object({
   subject: z.string().min(1, 'Subject is required'),
   message: z.string().min(1, 'Message is required'),
 });
+
+// Define database schema locally
+const contacts = pgTable("contacts", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  subject: text("subject").notNull(),
+  message: text("message").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+// Database connection
+let db: any = null;
+const getDb = async () => {
+  if (!db) {
+    // Only set WebSocket constructor if ws is available (not in Vercel environment)
+    try {
+      const ws = require("ws");
+      neonConfig.webSocketConstructor = ws;
+    } catch (error) {
+      console.log("WebSocket not available, using default connection");
+    }
+
+    const databaseUrl = process.env.DATABASE_URL || process.env.POSTGRES_URL;
+    if (!databaseUrl) {
+      throw new Error("DATABASE_URL not found in environment variables");
+    }
+
+    const pool = new Pool({ connectionString: databaseUrl });
+    db = drizzle({ client: pool });
+  }
+  return db;
+};
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Set CORS headers
@@ -36,7 +71,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Try to save to database
     let contact = null;
     try {
-      const [newContact] = await db.insert(contacts).values(validated).returning();
+      const database = await getDb();
+      const [newContact] = await database.insert(contacts).values(validated).returning();
       contact = newContact;
       console.log('Contact saved to database:', contact);
     } catch (dbError: any) {
