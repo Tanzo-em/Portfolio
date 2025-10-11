@@ -1,5 +1,5 @@
 import express, { type Request, type Response, type NextFunction } from 'express';
-import { registerRoutes } from './routes';
+
 import { setupVite, serveStatic, log } from './vite';
 import dotenv from 'dotenv';
 
@@ -40,7 +40,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 async function main() {
-  await registerRoutes(app);
+
 
   // Only run a dev server locally.
   if (process.env.NODE_ENV === 'development' && !process.env.VERCEL) {
