@@ -6,7 +6,7 @@ import { useRef } from "react";
 export default function AboutSection() {
   const handleDownloadResume = () => {
     const link = document.createElement("a");
-    link.href = "/resume.pdf"; 
+    link.href = "/Resume.pdf"; 
       console.log("Downloading file from:", link.href); 
     link.download = "Rakesh_Resume.pdf";
     link.click();
