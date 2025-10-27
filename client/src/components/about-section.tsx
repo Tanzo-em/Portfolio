@@ -8,7 +8,7 @@ export default function AboutSection() {
     const link = document.createElement("a");
     link.href = "/resume.pdf"; 
       console.log("Downloading file from:", link.href); 
-    link.download = "My_Resume.pdf";
+    link.download = "Rakesh_Resume.pdf";
     link.click();
   };
 
